@@ -15,6 +15,7 @@ public abstract class BaseFeedAdapter extends BaseAdapter {
     public BaseFeedAdapter(Context ctx, BaseFeed dataSource) {
         mCtx = ctx;
         mDataSource = dataSource;
+        mInflater = LayoutInflater.from(mCtx);
     }
 
     public BaseFeed getDataSource() {

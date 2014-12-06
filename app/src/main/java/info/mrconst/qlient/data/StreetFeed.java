@@ -19,10 +19,9 @@ public class StreetFeed extends BaseFeed<Street> {
     }
 
     private void _readFromResources() {
-        JavaType t = PacketReader.constructParametricType(ArrayList.class, Street.class);
         InputStream is = mCtx.getResources().openRawResource(R.raw.kiev_streets_uk);
         try {
-            mObjects = PacketReader.read(is, t);
+            mObjects = PacketReader.readStreets(is);
         } catch (IOException e) {
             e.printStackTrace();
         }

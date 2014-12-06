@@ -32,6 +32,8 @@ public class AnagramFragment extends Fragment {
         mStreetNameList = (ListView)mView.findViewById(R.id.street_listing);
 
         mStreetAdapter = new StreetAdapter(getActivity(), DataStore.streetFeed("uk"));
+        mStreetNameList.setAdapter(mStreetAdapter);
+
         return mView;
     }
 }
