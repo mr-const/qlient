@@ -12,10 +12,11 @@ import info.mrconst.qlient.PacketReader;
 import info.mrconst.qlient.R;
 import info.mrconst.qlient.model.Street;
 
-public class StreetFeed extends BaseFeed<Street> {
+public class StreetFeed extends FilterableFeed<Street> {
     public StreetFeed(Context ctx) {
         super(ctx, Street.class);
         _readFromResources();
+        startFilter("");
     }
 
     private void _readFromResources() {
@@ -25,5 +26,10 @@ public class StreetFeed extends BaseFeed<Street> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected boolean itemConformsToFilterCondition(Street item, CharSequence constraint) {
+        return item.getName().contains(constraint);
     }
 }

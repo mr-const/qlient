@@ -34,6 +34,7 @@ public class AnagramFragment extends Fragment {
         mStreetAdapter = new StreetAdapter(getActivity(), DataStore.streetFeed("uk"));
         mStreetNameList.setAdapter(mStreetAdapter);
 
+        mAnagramInput.addTextChangedListener(new FilterTextWatcher(DataStore.streetFeed("uk")));
         return mView;
     }
 }
