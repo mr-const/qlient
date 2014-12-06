@@ -16,6 +16,7 @@ public class QlientApp  extends Application {
     }
 
     private void _appInit() {
+        PacketReader.init();
         DataStore.init(this);
     }
 }
