@@ -11,6 +11,9 @@ import info.mrconst.qlient.notifications.NotificationCenter;
 
 public abstract class FilterableFeed<T> extends BaseFeed<T> implements Filterable {
 
+    public static final String NOTIFICATION_FILTER_STARTED = "filter_start";
+    public static final String NOTIFICATION_FILTER_FINISHED = "filter_finish";
+
     private static final String STATE_FILTER_CONSTRAINT = "filter_constraint";
 
     protected FeedFilter mFilter;
@@ -32,6 +35,7 @@ public abstract class FilterableFeed<T> extends BaseFeed<T> implements Filterabl
 
         mFilterConstraint = text;
         mFilter.filter(text.toString().toLowerCase());
+        NotificationCenter.sendMessage(NOTIFICATION_FILTER_STARTED, null, this, true);
     }
 
     @Override
@@ -80,6 +84,7 @@ public abstract class FilterableFeed<T> extends BaseFeed<T> implements Filterabl
             mFilteredObjects.clear();
             mFilteredObjects.addAll((Collection<T>)results.values);
             NotificationCenter.sendMessage(BaseFeed.NOTIFICATION_DATASET_UPDATE, null, FilterableFeed.this, true);
+            NotificationCenter.sendMessage(NOTIFICATION_FILTER_FINISHED, null, FilterableFeed.this, true);
         }
     }
 
