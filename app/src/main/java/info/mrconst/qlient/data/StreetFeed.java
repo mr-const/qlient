@@ -2,11 +2,10 @@ package info.mrconst.qlient.data;
 
 import android.content.Context;
 
-import com.fasterxml.jackson.databind.JavaType;
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
+
+import org.apache.commons.lang3.StringUtils;
 
 import info.mrconst.qlient.PacketReader;
 import info.mrconst.qlient.R;
@@ -30,6 +29,8 @@ public class StreetFeed extends FilterableFeed<Street> {
 
     @Override
     protected boolean itemConformsToFilterCondition(Street item, CharSequence constraint) {
-        return item.getName().contains(constraint);
+        String itm = item.getName().toLowerCase();
+        String valid = constraint.toString().toLowerCase();
+        return StringUtils.containsOnly(valid, itm);
     }
 }

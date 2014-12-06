@@ -7,6 +7,8 @@ import android.widget.Filterable;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import info.mrconst.qlient.notifications.NotificationCenter;
+
 public abstract class FilterableFeed<T> extends BaseFeed<T> implements Filterable {
 
     private static final String STATE_FILTER_CONSTRAINT = "filter_constraint";
@@ -77,7 +79,7 @@ public abstract class FilterableFeed<T> extends BaseFeed<T> implements Filterabl
                                       FilterResults results) {
             mFilteredObjects.clear();
             mFilteredObjects.addAll((Collection<T>)results.values);
-            // NotificationCenter.sendMessage(BaseFeed.NOTIFICATION_DATASET_UPDATE, null, FilterableFeed.this, true);
+            NotificationCenter.sendMessage(BaseFeed.NOTIFICATION_DATASET_UPDATE, null, FilterableFeed.this, true);
         }
     }
 

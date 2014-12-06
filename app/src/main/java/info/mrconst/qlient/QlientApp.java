@@ -3,6 +3,7 @@ package info.mrconst.qlient;
 import android.app.Application;
 
 import info.mrconst.qlient.data.DataStore;
+import info.mrconst.qlient.notifications.NotificationCenter;
 
 public class QlientApp  extends Application {
 
@@ -17,6 +18,7 @@ public class QlientApp  extends Application {
 
     private void _appInit() {
         PacketReader.init();
+        NotificationCenter.init();
         DataStore.init(this);
     }
 }

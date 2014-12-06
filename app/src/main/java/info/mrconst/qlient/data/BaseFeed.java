@@ -4,7 +4,11 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
+import info.mrconst.qlient.notifications.NotificationCenter;
+
 public abstract class BaseFeed<T> {
+
+    public static final String NOTIFICATION_DATASET_UPDATE = "dataset_update";
 
     Context mCtx;
     protected ArrayList<T> mObjects = new ArrayList<>();

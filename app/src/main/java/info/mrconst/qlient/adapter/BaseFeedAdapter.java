@@ -5,8 +5,12 @@ import android.view.LayoutInflater;
 import android.widget.BaseAdapter;
 
 import info.mrconst.qlient.data.BaseFeed;
+import info.mrconst.qlient.notifications.Notification;
+import info.mrconst.qlient.notifications.NotificationCenter;
+import info.mrconst.qlient.notifications.NotificationListener;
 
-public abstract class BaseFeedAdapter extends BaseAdapter {
+public abstract class BaseFeedAdapter extends BaseAdapter
+        implements NotificationListener {
 
     protected Context mCtx;
     protected LayoutInflater mInflater;
@@ -16,6 +20,8 @@ public abstract class BaseFeedAdapter extends BaseAdapter {
         mCtx = ctx;
         mDataSource = dataSource;
         mInflater = LayoutInflater.from(mCtx);
+
+        NotificationCenter.addListener(this, BaseFeed.NOTIFICATION_DATASET_UPDATE, mDataSource);
     }
 
     public BaseFeed getDataSource() {
@@ -40,5 +46,12 @@ public abstract class BaseFeedAdapter extends BaseAdapter {
     @Override
     public boolean isEmpty() {
         return mDataSource.size() == 0;
+    }
+
+    @Override
+    public synchronized void onNotification(Notification notification) {
+        if (BaseFeed.NOTIFICATION_DATASET_UPDATE.equals(notification.getName())) {
+            notifyDataSetChanged();
+        }
     }
 }
