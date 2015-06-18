@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyWidth="12.50%p"
+    android:keyHeight="10%p" >
+    <Row>
+        <Key android:keyLabel="-" android:keyWidth="20%p"/>
+        <Key android:keyLabel="." android:keyWidth="20%p"/>
+        <Key android:keyLabel=" " android:keyWidth="30%p"/>
+        <Key android:codes="-5" android:keyIcon="@drawable/sym_keyboard_delete"
+            android:isRepeatable="true"
+            android:horizontalGap="6.25%p"
+            android:keyEdgeFlags="right"/>
+        <Key android:codes="-2" android:keyLabel="CHNG" android:keyEdgeFlags="right"/>
+    </Row>
+    <Row>
+        <Key android:codes="-3"    android:keyIcon="@android:drawable/arrow_down_float" android:keyWidth="25%p" android:horizontalGap="12.50%p" />
+    </Row>
+</Keyboard>

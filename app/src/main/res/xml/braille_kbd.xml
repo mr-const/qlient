@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyWidth="12.50%p"
+    android:keyHeight="10%p" >
+    <Row>
+        <Key android:codes="48"    android:keyLabel="0" android:keyWidth="25%p" android:horizontalGap="6.25%p" android:keyEdgeFlags="left" />
+        <Key android:codes="-3"    android:keyIcon="@android:drawable/arrow_down_float" android:keyWidth="25%p" android:horizontalGap="12.50%p" />
+        <Key android:codes="55000" android:keyLabel="PREV" android:horizontalGap="6.25%p" />
+        <Key android:codes="55005" android:keyLabel="NEXT" android:keyEdgeFlags="right" />
+        <Key android:codes="-2" android:keyLabel="CHNG" android:keyEdgeFlags="right"/>
+    </Row>
+</Keyboard>

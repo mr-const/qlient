@@ -12,5 +12,6 @@
     <string name="anagram_input_hint">введите какие-нить буковки...</string>
     <string name="wait_dialog">Подождите</string>
     <string name="filter_in_progress">Фильтруется...</string>
+    <string name="title_tools">Декодеры</string>
 
 </resources>

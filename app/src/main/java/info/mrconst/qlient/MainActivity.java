@@ -25,6 +25,8 @@ public class MainActivity extends ActionBarActivity
      */
     private CharSequence mTitle;
 
+    QuestKeyboard mQuestKeyboard;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,10 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        mQuestKeyboard = new QuestKeyboard(this, R.id.keyboardView,
+                new int[] {R.xml.numbers_kbd, R.xml.braille_kbd, R.xml.morse_kbd});
+
     }
 
     @Override
@@ -51,7 +57,7 @@ public class MainActivity extends ActionBarActivity
                 mTitle = getString(R.string.title_anagram);
                 break;
             case 2:
-                mTitle = getString(R.string.title_section2);
+                mTitle = getString(R.string.title_tools);
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
@@ -95,6 +101,17 @@ public class MainActivity extends ActionBarActivity
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        if( mQuestKeyboard.isCustomKeyboardVisible() ) mQuestKeyboard.hideCustomKeyboard();
+        else
+            super.onBackPressed();
+    }
+
+    public QuestKeyboard getQuestKeyboard() {
+        return mQuestKeyboard;
+    }
+
     class FragmentInfo {
         public Class<? extends Fragment> cls;
         public FragmentInfo(Class<? extends Fragment> cls) {
@@ -103,7 +120,8 @@ public class MainActivity extends ActionBarActivity
     }
 
     FragmentInfo[] mFragments = {
-            new FragmentInfo(AnagramFragment.class)
+            new FragmentInfo(AnagramFragment.class),
+            new FragmentInfo(ToolFragment.class)
     };
 
     private void _showFragment(int id) {

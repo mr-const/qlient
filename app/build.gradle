@@ -24,14 +24,19 @@ android {
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/services/com.fasterxml.jackson.core.JsonFactory'
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.2'
-    compile 'com.fasterxml.jackson.core:jackson-core:2.5.0-SNAPSHOT'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.5.0-SNAPSHOT'
-    compile 'com.fasterxml.jackson.core:jackson-annotations:2.5.0-SNAPSHOT'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.5.0'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.5.0'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.5.0'
     compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.4.4'
     compile 'org.apache.commons:commons-lang3:3.3.2'
 }

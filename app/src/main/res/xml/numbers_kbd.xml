@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyWidth="12.50%p"
+    android:keyHeight="10%p" >
+    <Row>
+        <Key android:codes="65" android:keyLabel="1" android:keyEdgeFlags="left" />
+        <Key android:codes="66" android:keyLabel="2"/>
+        <Key android:codes="67" android:keyLabel="3"/>
+        <Key android:codes="68" android:keyLabel="4"/>
+        <Key android:codes="69" android:keyLabel="5"/>
+        <Key android:codes="70" android:keyLabel="6"/>
+        <Key android:codes="71" android:keyLabel="7"/>
+        <Key android:codes="72" android:keyLabel="8"/>
+        <Key android:codes="73" android:keyLabel="9"/>
+        <Key android:codes="-5" android:keyIcon="@drawable/sym_keyboard_delete"
+            android:isRepeatable="true"
+            android:horizontalGap="6.25%p"
+            android:keyEdgeFlags="right"/>
+    </Row>
+    <Row>
+        <Key android:codes="74" android:keyLabel="10"/>
+        <Key android:codes="75" android:keyLabel="11"/>
+        <Key android:codes="76" android:keyLabel="12"/>
+        <Key android:codes="77" android:keyLabel="13"/>
+        <Key android:codes="78" android:keyLabel="14"/>
+        <Key android:codes="79" android:keyLabel="15"/>
+        <Key android:codes="80" android:keyLabel="16"/>
+        <Key android:codes="81" android:keyLabel="17"/>
+        <Key android:codes="82" android:keyLabel="18"/>
+    </Row>
+    <Row>
+        <Key android:codes="83" android:keyLabel="19"/>
+        <Key android:codes="84" android:keyLabel="20"/>
+        <Key android:codes="85" android:keyLabel="21"/>
+        <Key android:codes="86" android:keyLabel="22"/>
+        <Key android:codes="87" android:keyLabel="23"/>
+        <Key android:codes="88" android:keyLabel="24"/>
+        <Key android:codes="89" android:keyLabel="25"/>
+        <Key android:codes="90" android:keyLabel="26"/>
+    </Row>
+    <Row>
+        <Key android:codes="91" android:keyLabel="27"/>
+        <Key android:codes="92" android:keyLabel="28"/>
+        <Key android:codes="93" android:keyLabel="29"/>
+        <Key android:codes="94" android:keyLabel="30"/>
+        <Key android:codes="95" android:keyLabel="31"/>
+        <Key android:codes="96" android:keyLabel="32"/>
+        <Key android:codes="97" android:keyLabel="33"/>
+
+        <Key android:codes="-2" android:keyLabel="CHNG" android:keyEdgeFlags="right"/>
+    </Row>
+</Keyboard>
