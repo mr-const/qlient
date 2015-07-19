@@ -52,6 +52,7 @@ public class QuestKeyboard {
     public void showCustomKeyboard( View v ) {
         mKeyboardView.setVisibility(View.VISIBLE);
         mKeyboardView.setEnabled(true);
+
         if( v!=null ) ((InputMethodManager)mCtx.getSystemService(Activity.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 

@@ -1,9 +1,7 @@
 package info.mrconst.qlient.data;
 
-import java.util.HashMap;
-
 /**
- * Created by konst on 30.04.2014.
+ * Таблица перекодировки морзянки в человеческий язык.
  */
 public class MorseTable {
     public static class Symbol {
