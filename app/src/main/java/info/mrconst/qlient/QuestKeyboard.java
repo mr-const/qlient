@@ -2,7 +2,6 @@ package info.mrconst.qlient;
 
 import android.app.Activity;
 import android.inputmethodservice.Keyboard;
-import android.inputmethodservice.KeyboardView;
 import android.text.Editable;
 import android.text.InputType;
 import android.view.MotionEvent;
@@ -10,6 +9,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+
+import info.mrconst.qlient.inputmethod.KeyboardView;
 
 public class QuestKeyboard {
 

@@ -2,15 +2,34 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        <item name="keyboardViewStyle">@style/AppWidget.KeyboardView</item>
     </style>
 
-    <style name="EditTextAgakat" parent="@android:style/Widget.EditText">
+    <style name="EditTextApp" parent="@android:style/Widget.EditText">
         <item name="android:background">@android:color/white</item>
         <item name="android:textColor">#000000</item>
         <item name="android:textColorHint">@android:color/darker_gray</item>
         <item name="android:padding">6dp</item>
         <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="AppWidget">
+        <item name="textAppearance">?textAppearance</item>
+    </style>
+
+    <style name="AppWidget.KeyboardView" parent="AppWidget">
+        <item name="background">@drawable/keyboard_background</item>
+        <item name="keyBackground">@drawable/btn_keyboard_key</item>
+        <item name="keyTextSize">22sp</item>
+        <item name="keyTextColor">#FFFFFFFF</item>
+        <item name="keyPreviewLayout">@layout/keyboard_key_preview</item>
+        <item name="keyPreviewOffset">-12dip</item>
+        <item name="keyPreviewHeight">80dip</item>
+        <item name="labelTextSize">14sp</item>
+        <item name="popupLayout">@layout/keyboard_popup_keyboard</item>
+        <item name="verticalCorrection">-10dip</item>
+        <item name="shadowColor">#BB000000</item>
+        <item name="shadowRadius">2.75</item>
     </style>
 
 </resources>

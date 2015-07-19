@@ -16,7 +16,7 @@
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-        <android.inputmethodservice.KeyboardView
+        <info.mrconst.qlient.inputmethod.KeyboardView
             android:id="@+id/keyboardView"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
