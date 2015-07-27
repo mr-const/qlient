@@ -57,7 +57,7 @@ implements NotificationListener {
     public void onNotification(Notification notification) {
         switch(notification.getName()) {
             case FilterableFeed.NOTIFICATION_FILTER_STARTED: {
-                if (!isDetached())
+                if (getActivity() != null)
                     mProgressDialog = ProgressDialog.show(getActivity(),
                             getActivity().getString(R.string.wait_dialog),
                             getActivity().getString(R.string.filter_in_progress),
