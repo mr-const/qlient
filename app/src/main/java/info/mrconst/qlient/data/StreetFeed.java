@@ -2,12 +2,10 @@ package info.mrconst.qlient.data;
 
 import android.content.Context;
 
+import com.google.common.base.CharMatcher;
+
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.Collections;
-
-import org.apache.commons.lang3.StringUtils;
 
 import info.mrconst.qlient.PacketReader;
 import info.mrconst.qlient.R;
@@ -32,13 +30,24 @@ public class StreetFeed extends FilterableFeed<Street> {
 
     @Override
     protected boolean itemConformsToFilterCondition(Street item, CharSequence constraint) {
-        String itm = item.getName().toLowerCase().replace("ул.", "").replace("пер.", "").trim();
-        char[] my = itm.toCharArray();
-        char[] their = constraint.toString().toLowerCase().toCharArray();
-        Arrays.sort(my);
-        Arrays.sort(their);
-        String my_str = new String(my, 0, their.length < my.length ? their.length : my.length);
-        String their_str = new String(their);
-        return my_str.equalsIgnoreCase(their_str);
+        String my = item.getName().toLowerCase()
+                .replace("ул.", "")
+                .replace("пр.", "")
+                .replace("пл.", "")
+                .replace("пер.", "")
+                .replace("бульв.", "").trim();
+        // однозначно если входящая строка длинее искомой, то мы не совпадаем даже частично.
+        if (constraint.length() > my.length())
+            return false;
+        String their = constraint.toString().toLowerCase();
+        // Перебираем все буквы входящего набора в искомом
+        for(char c: their.toCharArray()) {
+            int my_count = CharMatcher.is(c).countIn(my);
+            int their_count = CharMatcher.is(c).countIn(their);
+            if (my_count < their_count)
+                return false;
+        }
+
+        return true;
     }
 }
