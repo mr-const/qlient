@@ -1,47 +1,78 @@
 package info.mrconst.qlient.adapter;
 
 import android.content.Context;
-import android.view.View;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import info.mrconst.qlient.BR;
 import info.mrconst.qlient.R;
+import info.mrconst.qlient.data.BaseFeed;
 import info.mrconst.qlient.data.StreetFeed;
 import info.mrconst.qlient.model.Street;
+import info.mrconst.qlient.notifications.Notification;
+import info.mrconst.qlient.notifications.NotificationCenter;
+import info.mrconst.qlient.notifications.NotificationListener;
 
-public class StreetAdapter extends BaseFeedAdapter {
+public class StreetAdapter extends RecyclerView.Adapter<StreetAdapter.ViewHolder>
+        implements NotificationListener {
+
+    protected Context mCtx;
+    protected LayoutInflater mInflater;
+    protected BaseFeed mDataSource;
 
     public StreetAdapter(Context context, StreetFeed feed) {
-        super(context, feed);
-    }
-
-    private static class ViewHolder {
-        TextView streetName;
-        int position;
+        mCtx = context;
+        mDataSource = feed;
+        mInflater = LayoutInflater.from(mCtx);
+        NotificationCenter.addListener(this, BaseFeed.NOTIFICATION_DATASET_UPDATE, mDataSource);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View view = convertView;
-
-        if (view == null) {
-            view = mInflater.inflate(R.layout.street_row, parent, false);
-
-            ViewHolder holder = new ViewHolder();
-            holder.streetName = (TextView)view.findViewById(R.id.streetname_view);
-
-            view.setTag(holder);
-        }
-
-        ViewHolder holder = (ViewHolder) view.getTag();
-        holder.position = position;
-
-        _bindStreet(holder, (Street)mDataSource.get(position), position);
-
-        return view;
+    public int getItemCount() {
+        return mDataSource.size();
     }
 
-    private void _bindStreet(ViewHolder holder, Street str, int position) {
-        holder.streetName.setText(str.getName());
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public synchronized void onNotification(Notification notification) {
+        if (BaseFeed.NOTIFICATION_DATASET_UPDATE.equals(notification.getName())) {
+            notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int i) {
+        // For databinding to work we inflate our view using DataBindingUtil and
+        // give ViewDataBinding to holder, so it'll be able to bind data when needed.
+        return new ViewHolder(DataBindingUtil.inflate(mInflater, R.layout.street_row, parent, false));
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        final Street item = (Street)mDataSource.get(position);
+        // Performing actual databinding
+        holder.getBinding().setVariable(BR.street, item);
+        holder.getBinding().executePendingBindings();
+    }
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
+
+        private ViewDataBinding mBinding;
+
+        public ViewHolder(ViewDataBinding binding) {
+            super(binding.getRoot());
+            mBinding = binding;
+        }
+
+        public ViewDataBinding getBinding() {
+            return mBinding;
+        }
     }
 }

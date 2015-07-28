@@ -1,9 +1,13 @@
 package info.mrconst.qlient;
 
 import android.app.ProgressDialog;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +28,7 @@ public class AnagramFragment extends Fragment
 implements NotificationListener {
     private View mView;
     private EditText mAnagramInput;
-    private ListView mStreetNameList;
+    private RecyclerView mStreetNameList;
     StreetAdapter mStreetAdapter;
     ProgressDialog mProgressDialog;
 
@@ -35,11 +39,11 @@ implements NotificationListener {
             ((ViewGroup) mView.getParent()).removeView(mView);
             return mView;
         }
-
-        mView = inflater.inflate(R.layout.fragment_anagram, null);
+        mView = inflater.inflate(R.layout.fragment_anagram, container, false);
 
         mAnagramInput = (EditText)mView.findViewById(R.id.anagram_input);
-        mStreetNameList = (ListView)mView.findViewById(R.id.street_listing);
+        mStreetNameList = (RecyclerView)mView.findViewById(R.id.street_listing);
+        mStreetNameList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         StreetFeed dataSource = DataStore.streetFeed("uk");
         mStreetAdapter = new StreetAdapter(getActivity(), dataSource);
@@ -57,7 +61,7 @@ implements NotificationListener {
     public void onNotification(Notification notification) {
         switch(notification.getName()) {
             case FilterableFeed.NOTIFICATION_FILTER_STARTED: {
-                if (!isDetached())
+                if (getActivity() != null)
                     mProgressDialog = ProgressDialog.show(getActivity(),
                             getActivity().getString(R.string.wait_dialog),
                             getActivity().getString(R.string.filter_in_progress),
