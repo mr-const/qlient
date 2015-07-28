@@ -33,8 +33,10 @@
         <!-- Layout resource for popup keyboards. -->
         <attr name="popupLayout" format="reference" />
 
-        <!--<attr name="shadowColor" />-->
-        <!--<attr name="shadowRadius" />-->
+        <attr name="shadowColor" format="color"/>
+        <attr name="shadowRadius" format="float"/>
+        <!-- Default appearance of text: color, typeface, size, and style. -->
+        <attr name="textAppearance" format="reference" />
     </declare-styleable>
     <declare-styleable name="KeyboardViewPreviewState">
         <!-- State for {@link android.inputmethodservice.KeyboardView KeyboardView}

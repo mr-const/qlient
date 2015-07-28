@@ -104,7 +104,7 @@ public class QuestKeyboard {
         public void onKey(int primaryCode, int[] keyCodes) {
             // Get the EditText and its Editable
             View focusCurrent = mCtx.getWindow().getCurrentFocus();
-            if( focusCurrent==null || focusCurrent.getClass()!=EditText.class ) return;
+            if( focusCurrent==null || !(focusCurrent instanceof EditText) ) return;
             EditText edittext = (EditText) focusCurrent;
             Editable editable = edittext.getText();
             if (editable == null)
