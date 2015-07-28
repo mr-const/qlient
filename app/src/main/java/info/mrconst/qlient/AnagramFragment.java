@@ -39,8 +39,7 @@ implements NotificationListener {
             ((ViewGroup) mView.getParent()).removeView(mView);
             return mView;
         }
-        ViewDataBinding bind = DataBindingUtil.inflate(inflater, R.layout.fragment_anagram, container, false);
-        mView = bind.getRoot();
+        mView = inflater.inflate(R.layout.fragment_anagram, container, false);
 
         mAnagramInput = (EditText)mView.findViewById(R.id.anagram_input);
         mStreetNameList = (RecyclerView)mView.findViewById(R.id.street_listing);
