@@ -34,8 +34,6 @@ import android.inputmethodservice.Keyboard.Key;
 import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Message;
-import android.os.UserHandle;
-import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.GestureDetector;
@@ -45,8 +43,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup.LayoutParams;
-import android.view.accessibility.AccessibilityEvent;
-import android.view.accessibility.AccessibilityManager;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -254,7 +250,9 @@ public class KeyboardView extends View implements View.OnClickListener {
     /** Whether the requirement of a headset to hear passwords if accessibility is enabled is announced. */
     private boolean mHeadsetRequiredToHearPasswordsAnnounced;
 
-    Handler mHandler = new Handler() {
+    Typeface mCurrentTypeface;
+
+            Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -283,6 +281,10 @@ public class KeyboardView extends View implements View.OnClickListener {
 
     public KeyboardView(Context context, AttributeSet attrs, int defStyleAttr) {
         this(context, attrs, defStyleAttr, 0);
+    }
+
+    public void setCurrentTypeface(Typeface mCurrentTypeface) {
+        this.mCurrentTypeface = mCurrentTypeface;
     }
 
     public KeyboardView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -364,8 +366,11 @@ public class KeyboardView extends View implements View.OnClickListener {
         mPopupParent = this;
         //mPredicting = true;
 
+        mCurrentTypeface = Typeface.DEFAULT;
+
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
+        mPaint.setTypeface(mCurrentTypeface);
         mPaint.setTextSize(keyTextSize);
         mPaint.setTextAlign(Align.CENTER);
         mPaint.setAlpha(255);
@@ -705,10 +710,8 @@ public class KeyboardView extends View implements View.OnClickListener {
                 // For characters, use large font. For labels like "Done", use small font.
                 if (label.length() > 1 && key.codes.length < 2) {
                     paint.setTextSize(mLabelTextSize);
-                    paint.setTypeface(Typeface.DEFAULT_BOLD);
                 } else {
                     paint.setTextSize(mKeyTextSize);
-                    paint.setTypeface(Typeface.DEFAULT);
                 }
                 // Draw a drop shadow for the text
                 paint.setShadowLayer(mShadowRadius, 0, 0, mShadowColor);
@@ -894,10 +897,8 @@ public class KeyboardView extends View implements View.OnClickListener {
             mPreviewText.setText(getPreviewText(key));
             if (key.label.length() > 1 && key.codes.length < 2) {
                 mPreviewText.setTextSize(TypedValue.COMPLEX_UNIT_PX, mKeyTextSize);
-                mPreviewText.setTypeface(Typeface.DEFAULT_BOLD);
             } else {
                 mPreviewText.setTextSize(TypedValue.COMPLEX_UNIT_PX, mPreviewTextSizeLarge);
-                mPreviewText.setTypeface(Typeface.DEFAULT);
             }
         }
         mPreviewText.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),

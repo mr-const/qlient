@@ -1,6 +1,7 @@
 package info.mrconst.qlient;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.inputmethodservice.Keyboard;
 import android.text.Editable;
 import android.text.InputType;
@@ -39,6 +40,10 @@ public class QuestKeyboard {
         mKeyboardView.setOnKeyboardActionListener(new OnKeyboardActionListener() );
 
         host.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+    }
+
+    public void setKeyboardTypeface(Typeface typeface) {
+        mKeyboardView.setCurrentTypeface(typeface);
     }
 
     public int getCurrentLayout() {
@@ -116,10 +121,10 @@ public class QuestKeyboard {
                     hideCustomKeyboard();
                     break;
                 case CodeDelete:
-                    if (editable != null && start > 0) editable.delete(start - 1, start);
+                    if (start > 0) editable.delete(start - 1, start);
                     break;
                 case CodeClear:
-                    if (editable != null) editable.clear();
+                    editable.clear();
                     break;
                 case CodeLeft:
                     if (start > 0) edittext.setSelection(start - 1);
