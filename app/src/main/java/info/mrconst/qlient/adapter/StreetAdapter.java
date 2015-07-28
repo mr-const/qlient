@@ -15,33 +15,24 @@ public class StreetAdapter extends BaseFeedAdapter {
         super(context, feed);
     }
 
-    private static class ViewHolder {
-        TextView streetName;
-        int position;
+    @Override
+    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int i) {
+        return new ViewHolder(mInflater.inflate(R.layout.street_row, parent, false));
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View view = convertView;
-
-        if (view == null) {
-            view = mInflater.inflate(R.layout.street_row, parent, false);
-
-            ViewHolder holder = new ViewHolder();
-            holder.streetName = (TextView)view.findViewById(R.id.streetname_view);
-
-            view.setTag(holder);
-        }
-
-        ViewHolder holder = (ViewHolder) view.getTag();
-        holder.position = position;
-
-        _bindStreet(holder, (Street)mDataSource.get(position), position);
-
-        return view;
+    public void onBindViewHolder(BaseViewHolder baseViewHolder, int i) {
+        ViewHolder holder = (ViewHolder) baseViewHolder;
+        Street str = (Street)mDataSource.get(i);
+        holder.streetName.setText(str.getName());
     }
 
-    private void _bindStreet(ViewHolder holder, Street str, int position) {
-        holder.streetName.setText(str.getName());
+    private static class ViewHolder extends BaseViewHolder {
+        TextView streetName;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            streetName = (TextView)itemView.findViewById(R.id.streetname_view);
+        }
     }
 }

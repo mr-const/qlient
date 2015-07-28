@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="street" type="info.mrconst.qlient.model.Street"/>
+    </data>
+<LinearLayout android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
     <EditText
@@ -9,8 +12,9 @@
         android:layout_height="wrap_content"
         android:hint="@string/anagram_input_hint"
         android:inputType="text"/>
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/street_listing"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 </LinearLayout>
+</layout>
