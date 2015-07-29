@@ -687,7 +687,7 @@ public class KeyboardView extends View implements View.OnClickListener {
                 drawSingleKey = true;
             }
         }
-        canvas.drawColor(0x00000000, PorterDuff.Mode.CLEAR);
+        canvas.drawColor(0xFF272727);
         final int keyCount = keys.length;
         for (int i = 0; i < keyCount; i++) {
             final Key key = keys[i];

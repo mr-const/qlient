@@ -18,7 +18,6 @@
     </style>
 
     <style name="AppWidget.KeyboardView" parent="AppWidget">
-        <item name="background">@drawable/keyboard_background</item>
         <item name="keyBackground">@drawable/btn_keyboard_key</item>
         <item name="keyTextSize">22sp</item>
         <item name="keyTextColor">#FFFFFFFF</item>
