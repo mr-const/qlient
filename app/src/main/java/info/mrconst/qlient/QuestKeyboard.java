@@ -20,6 +20,9 @@ public class QuestKeyboard {
     private int mCurrentLayout;
     private int[] mKbdLayouts;
 
+    private int mCurrentFont = 0;
+    private static String[] sKbdFonts = {FontManager.DEFAULT, FontManager.BRAILLE, FontManager.SEMAPHORE};
+
     public final static int CodeDelete   = Keyboard.KEYCODE_DELETE;
     public final static int CodeCancel   = Keyboard.KEYCODE_CANCEL;
     public final static int CodePrev     = 55000;
@@ -30,6 +33,7 @@ public class QuestKeyboard {
     public final static int CodeNext     = 55005;
     public final static int CodeClear    = 55006;
     public final static int CodeChange   = Keyboard.KEYCODE_MODE_CHANGE;
+    static final int KEYCODE_LANGUAGE_SWITCH = -101;
 
     public QuestKeyboard(Activity host, int viewid, int[] kbdLayouts) {
         mCurrentLayout = 0;
@@ -152,6 +156,10 @@ public class QuestKeyboard {
                     int count = mKbdLayouts.length;
                     mCurrentLayout = (mCurrentLayout + 1) % count;
                     mKeyboardView.setKeyboard(new Keyboard(mCtx, mKbdLayouts[mCurrentLayout]));
+                    break;
+                case KEYCODE_LANGUAGE_SWITCH:
+                    mCurrentFont = (mCurrentFont + 1) % sKbdFonts.length;
+                    mKeyboardView.setCurrentTypeface(FontManager.getTypeface(sKbdFonts[mCurrentFont]));
                     break;
                 default: // Insert character
                     editable.insert(start, Character.toString((char) primaryCode));

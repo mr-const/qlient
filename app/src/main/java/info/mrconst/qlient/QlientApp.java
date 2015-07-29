@@ -20,5 +20,6 @@ public class QlientApp  extends Application {
         PacketReader.init();
         NotificationCenter.init();
         DataStore.init(this);
+        FontManager.init(this);
     }
 }

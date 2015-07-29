@@ -283,8 +283,10 @@ public class KeyboardView extends View implements View.OnClickListener {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public void setCurrentTypeface(Typeface mCurrentTypeface) {
-        this.mCurrentTypeface = mCurrentTypeface;
+    public void setCurrentTypeface(Typeface currentTypeface) {
+        mCurrentTypeface = currentTypeface;
+        mPaint.setTypeface(currentTypeface);
+        invalidateAllKeys();
     }
 
     public KeyboardView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {

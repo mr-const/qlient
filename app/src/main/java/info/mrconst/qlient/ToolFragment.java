@@ -29,11 +29,11 @@ public class ToolFragment extends Fragment {
 
         mMainInput = (EditText)v.findViewById(R.id.main_input);
 
-        Typeface mBraille = Typeface.createFromAsset(getActivity().getAssets(), "fonts/braille.ttf");
+        Typeface braille = FontManager.getTypeface(FontManager.BRAILLE);
         mBrailleLatView = (TextView)v.findViewById(R.id.braille_lat_text);
-        mBrailleLatView.setTypeface(mBraille);
+        mBrailleLatView.setTypeface(braille);
         mBrailleCyrView = (TextView)v.findViewById(R.id.braille_cyr_text);
-        mBrailleCyrView.setTypeface(mBraille);
+        mBrailleCyrView.setTypeface(braille);
 
         mLatinText = (TextView)v.findViewById(R.id.latin_text);
         mCyrillicText = (TextView)v.findViewById(R.id.cyrillic_text);
