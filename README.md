@@ -9,3 +9,4 @@
 ## Development
 
 * Anagaram List now uses RecyclerView with experimental [databinding](https://developer.android.com/tools/data-binding/guide.html) support
+* Custom KeyboardView allows change of keys typeface
