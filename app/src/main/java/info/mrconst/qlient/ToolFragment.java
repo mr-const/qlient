@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.StringTokenizer;
 
+import info.mrconst.qlient.data.FlagTable;
 import info.mrconst.qlient.data.MorseTable;
 
 public class ToolFragment extends Fragment {
@@ -41,19 +42,25 @@ public class ToolFragment extends Fragment {
         mMainInput.addTextChangedListener(
                 new TextWatcher() {
                     @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        MainActivity ctx = (MainActivity)getActivity();
-                        if (ctx.getQuestKeyboard().getCurrentLayout() == R.xml.morse_kbd)
-                            _demorseficate(s);
-                        else
-                            _setNormalText(s);
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                     }
 
                     @Override
-                    public void afterTextChanged(Editable s) {}
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        MainActivity ctx = (MainActivity) getActivity();
+                        if (ctx.getQuestKeyboard().getCurrentLayout() == R.xml.morse_kbd) {
+                            _demorseficate(s);
+                        } else if (ctx.getQuestKeyboard().getCurrentLayout() == R.xml.qwerty_kbd) {
+                            if (ctx.getQuestKeyboard().getCurrentTypeface().equals(FontManager.SEMAPHORE))
+                                _convertSema(s);
+                        } else {
+                            _setNormalText(s);
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                    }
                 });
 
         ((MainActivity)getActivity()).getQuestKeyboard().registerEditText(mMainInput);
@@ -83,6 +90,21 @@ public class ToolFragment extends Fragment {
         mBrailleLatView.setText(s);
         mLatinText.setText(s);
         CharSequence cyr = _cyrillize(s);
+        mBrailleCyrView.setText(cyr);
+        mCyrillicText.setText(cyr);
+    }
+
+    private void _convertSema(CharSequence s) {
+        mBrailleLatView.setText(s);
+        mLatinText.setText(s);
+
+        int count = s.length();
+        StringBuilder sb = new StringBuilder(count);
+        // Семафорная азбука кодируется верхним регистром, поэтому конвертируем
+        for(Character ch : s.toString().toUpperCase().toCharArray()) {
+            sb.append(FlagTable.find(ch));
+        }
+        String cyr = sb.toString();
         mBrailleCyrView.setText(cyr);
         mCyrillicText.setText(cyr);
     }

@@ -97,6 +97,10 @@ public class QuestKeyboard {
         edittext.setInputType( edittext.getInputType() | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS );
     }
 
+    public String getCurrentTypeface() {
+        return sKbdFonts[mCurrentFont];
+    }
+
     class OnKeyboardActionListener implements KeyboardView.OnKeyboardActionListener {
 
         @Override
