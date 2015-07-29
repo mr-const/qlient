@@ -42,7 +42,7 @@ public class MainActivity extends ActionBarActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
         mQuestKeyboard = new QuestKeyboard(this, R.id.keyboardView,
-                new int[] {R.xml.numbers_kbd, R.xml.braille_kbd, R.xml.morse_kbd});
+                new int[] {R.xml.numbers_kbd, R.xml.qwerty_kbd, R.xml.morse_kbd});
 
     }
 
